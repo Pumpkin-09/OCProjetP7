@@ -18,36 +18,52 @@ def recuperation_csv(fichier_csv):
 
 
 def calcul_benefice(cout, pourcentage):
-    pourcentage = Decimal(pourcentage) / Decimal("100")
+    pourcentage = pourcentage / Decimal("100")
     return pourcentage * cout
 
 
-def affichage_liste_action(meilleur_benefice):
+def affichage_liste_action(assemblage, meilleur_benefice):
     print("Voici la meilleur combinaison d'action pour un maximum de 500€ d'investissement sur 2ans:")
-    for i in range(len(meilleur_benefice)-1):
-        print(meilleur_benefice[i])
-    print(f"Bénéfice: {meilleur_benefice[-1]}")
+    for i in range(len(assemblage)):
+        print(assemblage[i])
+    print(f"Bénéfice: {meilleur_benefice}")
+
+
+def meilleur_combinaison_actions(liste_actions, limite_cout):
+    nombre_actions = len(liste_actions)
+    dp = [[Decimal("0") for _ in range(limite_cout + 1)] for _ in range(nombre_actions + 1)]
+    
+    for i in range(1, nombre_actions + 1):
+        action = liste_actions[i - 1]
+        cout_i = Decimal(action[1])
+        pourcentage_i = Decimal(action[2])
+        benefice_i = calcul_benefice(cout_i, pourcentage_i)
+
+        for cout in range(limite_cout + 1):
+            if cout_i > cout:
+                dp[i][cout] = dp[i - 1][cout]
+            else:
+                dp[i][cout] = max(dp[i - 1][cout], benefice_i + dp[i -1][int(cout - cout_i)])
+    benefice_max = dp[nombre_actions][limite_cout]
+    
+    assemblage = []
+    cout = Decimal(limite_cout)
+    for j in range(nombre_actions, 0, -1):
+        action = liste_actions[j -1]
+        cout_j = Decimal(action[1])
+
+        if dp[j][int(cout)] != dp[j - 1][int(cout)]:
+            assemblage.append(action)
+            cout -= cout_j
+    return assemblage, benefice_max
 
 
 def main():
-    meilleur_benefice = [Decimal("0")]
     fichier_csv = os.path.join("Liste_actions.csv")
     liste_actions = recuperation_csv(fichier_csv)
-    for i in range(2, len(liste_actions) + 1):
-        for combinaison in combinations(liste_actions, i):
-            cout_total = Decimal("0")
-            benefice = Decimal("0")
-
-            for action in combinaison:
-                cout = Decimal(action[1])
-                pourcentage = Decimal(action[2])
-                benefice += calcul_benefice(cout, pourcentage)
-                cout_total += cout
-            if cout_total <= 500 and benefice > meilleur_benefice[-1]:
-                    combinaison_liste = list(combinaison)
-                    combinaison_liste.append(benefice)
-                    meilleur_benefice = combinaison_liste
-    affichage_liste_action(meilleur_benefice)
+    limite_cout = 500
+    meilleur_actions, benefice_max = meilleur_combinaison_actions(liste_actions, limite_cout)
+    affichage_liste_action(meilleur_actions, benefice_max)
 
 
 main()
