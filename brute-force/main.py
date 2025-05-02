@@ -22,8 +22,8 @@ def calcul_benefice(cout, pourcentage):
     return pourcentage * cout
 
 
-def affichage_liste_action(meilleur_benefice):
-    print("Voici la meilleur combinaison d'action pour un maximum de 500€ d'investissement sur 2ans:")
+def affichage_liste_action(meilleur_benefice, cout_total):
+    print(f"Voici la meilleur combinaison d'action pour un maximum de {cout_total}€ d'investissement sur 2 ans:")
     for i in range(len(meilleur_benefice)-1):
         print(meilleur_benefice[i])
     print(f"Bénéfice: {meilleur_benefice[-1]}")
@@ -47,7 +47,8 @@ def main():
                     combinaison_liste = list(combinaison)
                     combinaison_liste.append(benefice)
                     meilleur_benefice = combinaison_liste
-    affichage_liste_action(meilleur_benefice)
+                    total_cout = cout_total
+    affichage_liste_action(meilleur_benefice, total_cout)
 
 
 main()

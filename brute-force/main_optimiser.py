@@ -22,8 +22,8 @@ def calcul_benefice(cout, pourcentage):
     return pourcentage * cout
 
 
-def affichage_liste_action(assemblage, meilleur_benefice):
-    print("Voici la meilleur combinaison d'action pour un maximum de 500€ d'investissement sur 2ans:")
+def affichage_liste_action(assemblage, meilleur_benefice, cout_total):
+    print(f"Voici la meilleur combinaison d'action pour un maximum de {cout_total}€ d'investissement sur 2 ans:")
     for i in range(len(assemblage)):
         print(assemblage[i])
     print(f"Bénéfice: {meilleur_benefice}")
@@ -47,6 +47,7 @@ def meilleur_combinaison_actions(liste_actions, limite_cout):
     benefice_max = dp[nombre_actions][limite_cout]
     
     assemblage = []
+    cout_total = Decimal("0")
     cout = Decimal(limite_cout)
     for j in range(nombre_actions, 0, -1):
         action = liste_actions[j -1]
@@ -54,16 +55,17 @@ def meilleur_combinaison_actions(liste_actions, limite_cout):
 
         if dp[j][int(cout)] != dp[j - 1][int(cout)]:
             assemblage.append(action)
+            cout_total += cout_j
             cout -= cout_j
-    return assemblage, benefice_max
+    return assemblage, benefice_max, cout_total
 
 
 def main():
     fichier_csv = os.path.join("Liste_actions.csv")
     liste_actions = recuperation_csv(fichier_csv)
     limite_cout = 500
-    meilleur_actions, benefice_max = meilleur_combinaison_actions(liste_actions, limite_cout)
-    affichage_liste_action(meilleur_actions, benefice_max)
+    meilleur_actions, benefice_max, cout_total = meilleur_combinaison_actions(liste_actions, limite_cout)
+    affichage_liste_action(meilleur_actions, benefice_max, cout_total)
 
 
 main()
