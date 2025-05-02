@@ -1,8 +1,6 @@
 import csv
 from decimal import Decimal
-from itertools import combinations
 import re
-import os
 
 
 def recuperation_csv(fichier_csv):
@@ -61,7 +59,7 @@ def meilleur_combinaison_actions(liste_actions, limite_cout):
 
 
 def main():
-    fichier_csv = os.path.join("Liste_actions.csv")
+    fichier_csv = "Liste_actions.csv"
     liste_actions = recuperation_csv(fichier_csv)
     limite_cout = 500
     meilleur_actions, benefice_max, cout_total = meilleur_combinaison_actions(liste_actions, limite_cout)
