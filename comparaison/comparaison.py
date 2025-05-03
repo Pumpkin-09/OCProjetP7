@@ -1,18 +1,19 @@
 import csv
 from decimal import Decimal
-import re
 
 
 def recuperation_csv(fichier_csv):
     liste_actions = []
+    actions_supprimer = []
     with open(fichier_csv, "r") as f:
         lecture_csv = csv.reader(f, delimiter=",")
         next(lecture_csv)
         for ligne in lecture_csv:
-            element_modifier = re.sub("%", "", ligne[2])
-            ligne[2] = element_modifier
-            liste_actions.append(ligne)
-        return liste_actions
+            if Decimal(ligne[1]) <= Decimal("0"):
+                actions_supprimer.append(ligne)
+            else:
+                liste_actions.append(ligne)
+        return liste_actions, actions_supprimer
 
 
 def calcul_benefice(cout, pourcentage):
@@ -20,10 +21,13 @@ def calcul_benefice(cout, pourcentage):
     return pourcentage * cout
 
 
-def affichage_liste_action(assemblage, meilleur_benefice, cout_total):
-    print(f"Voici la meilleur combinaison d'action pour un maximum de {cout_total}€ d'investissement sur 2 ans:")
-    for i in range(len(assemblage)):
-        print(assemblage[i])
+def affichage_liste_action(assemblage, meilleur_benefice, cout_total, action_supprimer):
+    print(f"Voici la liste des actions qui sont supprimées en raison de leurs cout négatif ou nul:")
+    for i in range(len(action_supprimer)):
+        print(f"{action_supprimer[i][0]} - cout: {action_supprimer[i][1]} benefice: {action_supprimer[i][2]}")
+    print(f"\nVoici la meilleur combinaison d'action pour un maximum de {cout_total}€ d'investissement sur 2 ans:")
+    for j in range(len(assemblage)):
+        print(f"{assemblage[j][0]} - cout: {assemblage[j][1]} benefice: {assemblage[j][2]}")
     print(f"Bénéfice: {meilleur_benefice}")
 
 
@@ -41,7 +45,10 @@ def meilleur_combinaison_actions(liste_actions, limite_cout):
             if cout_i > cout:
                 dp[i][cout] = dp[i - 1][cout]
             else:
-                dp[i][cout] = max(dp[i - 1][cout], benefice_i + dp[i -1][int(cout - cout_i)])
+                try:
+                    dp[i][cout] = max(dp[i - 1][cout], benefice_i + dp[i -1][int(cout - cout_i)])
+                except Exception:
+                    print(f"i {i}, cout {cout}, (cout_i=) {cout_i}")
     benefice_max = dp[nombre_actions][limite_cout]
     
     assemblage = []
@@ -59,11 +66,12 @@ def meilleur_combinaison_actions(liste_actions, limite_cout):
 
 
 def main():
-    fichier_csv = "/home/pumpkin/OpenClassrooms/Projet/P7/brute-force/Liste_actions.csv"
-    liste_actions = recuperation_csv(fichier_csv)
+    #  fichier_csv = "/home/pumpkin/OpenClassrooms/Projet/P7/comparaison/dataset1.csv"
+    fichier_csv = "/home/pumpkin/OpenClassrooms/Projet/P7/comparaison/dataset2.csv"
+    liste_actions, actions_supprimer = recuperation_csv(fichier_csv)
     limite_cout = 500
     meilleur_actions, benefice_max, cout_total = meilleur_combinaison_actions(liste_actions, limite_cout)
-    affichage_liste_action(meilleur_actions, benefice_max, cout_total)
+    affichage_liste_action(meilleur_actions, benefice_max, cout_total, actions_supprimer)
 
 
 main()
