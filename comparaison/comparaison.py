@@ -1,5 +1,6 @@
 import csv
 from decimal import Decimal
+import os
 
 
 def recuperation_csv(fichier_csv):
@@ -66,8 +67,9 @@ def meilleur_combinaison_actions(liste_actions, limite_cout):
 
 
 def main():
-    #  fichier_csv = "/home/pumpkin/OpenClassrooms/Projet/P7/comparaison/dataset1.csv"
-    fichier_csv = "/home/pumpkin/OpenClassrooms/Projet/P7/comparaison/dataset2.csv"
+    chemin = os.path.dirname(os.path.abspath(__file__))
+    fichier_csv = os.path.join(chemin, "dataset1.csv")
+    #  fichier_csv = os.path.join(chemin, "dataset2.csv")
     liste_actions, actions_supprimer = recuperation_csv(fichier_csv)
     limite_cout = 500
     meilleur_actions, benefice_max, cout_total = meilleur_combinaison_actions(liste_actions, limite_cout)

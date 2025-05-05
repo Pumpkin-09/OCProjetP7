@@ -2,6 +2,7 @@ import csv
 from decimal import Decimal
 from itertools import combinations
 import re
+import os
 
 
 def recuperation_csv(fichier_csv):
@@ -30,7 +31,8 @@ def affichage_liste_action(meilleur_benefice, cout_total):
 
 def main():
     meilleur_benefice = [Decimal("0")]
-    fichier_csv = "Liste_actions.csv"
+    chemin = os.path.dirname(os.path.abspath(__file__))
+    fichier_csv = os.path.join(chemin, "Liste_actions.csv")
     liste_actions = recuperation_csv(fichier_csv)
     for i in range(1, len(liste_actions) + 1):
         for combinaison in combinations(liste_actions, i):

@@ -1,6 +1,7 @@
 import csv
 from decimal import Decimal
 import re
+import os
 
 
 def recuperation_csv(fichier_csv):
@@ -59,7 +60,8 @@ def meilleur_combinaison_actions(liste_actions, limite_cout):
 
 
 def main():
-    fichier_csv = "/home/pumpkin/OpenClassrooms/Projet/P7/brute-force/Liste_actions.csv"
+    chemin = os.path.dirname(os.path.abspath(__file__))
+    fichier_csv = os.path.join(chemin, "Liste_actions.csv")
     liste_actions = recuperation_csv(fichier_csv)
     limite_cout = 500
     meilleur_actions, benefice_max, cout_total = meilleur_combinaison_actions(liste_actions, limite_cout)
