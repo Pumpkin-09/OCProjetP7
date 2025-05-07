@@ -46,10 +46,7 @@ def meilleur_combinaison_actions(liste_actions, limite_cout):
             if cout_i > cout:
                 dp[i][cout] = dp[i - 1][cout]
             else:
-                try:
-                    dp[i][cout] = max(dp[i - 1][cout], benefice_i + dp[i -1][int(cout - cout_i)])
-                except Exception:
-                    print(f"i {i}, cout {cout}, (cout_i=) {cout_i}")
+                dp[i][cout] = max(dp[i - 1][cout], benefice_i + dp[i -1][int(cout - cout_i)])
     benefice_max = dp[nombre_actions][limite_cout]
     
     assemblage = []
