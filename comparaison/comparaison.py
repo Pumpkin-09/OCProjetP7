@@ -63,14 +63,16 @@ def meilleur_combinaison_actions(liste_actions, limite_cout):
     return assemblage, benefice_max, cout_total
 
 
-def main():
+def main(nom_csv):
     chemin = os.path.dirname(os.path.abspath(__file__))
-    fichier_csv = os.path.join(chemin, "dataset1.csv")
-    #  fichier_csv = os.path.join(chemin, "dataset2.csv")
+    fichier_csv = os.path.join(chemin, nom_csv)
     liste_actions, actions_supprimer = recuperation_csv(fichier_csv)
     limite_cout = 500
     meilleur_actions, benefice_max, cout_total = meilleur_combinaison_actions(liste_actions, limite_cout)
     affichage_liste_action(meilleur_actions, benefice_max, cout_total, actions_supprimer)
 
 
-main()
+nom_csv = "dataset1.csv"
+#  nom_csv = "dataset2.csv"
+
+main(nom_csv)
