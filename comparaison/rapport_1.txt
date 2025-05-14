@@ -1,0 +1,50 @@
+Voici la liste des actions qui sont supprimées en raison de leurs cout négatif ou nul:
+Share-XJDT - cout: 0.0 benefice: 37.11
+Share-YKBD - cout: 0.0 benefice: 22.75
+Share-IJAW - cout: 0.0 benefice: 30.69
+Share-MWTE - cout: 0.0 benefice: 18.37
+Share-UVZJ - cout: 0.0 benefice: 26.26
+Share-BOET - cout: 0.0 benefice: 37.01
+Share-GCEX - cout: 0.0 benefice: 34.72
+Share-DWQL - cout: 0.0 benefice: 19.69
+Share-FXZS - cout: 0.0 benefice: 30.03
+Share-CVOW - cout: 0.0 benefice: 6.42
+Share-XABA - cout: 0.0 benefice: 27.91
+Share-NMYP - cout: 0.0 benefice: 11.43
+Share-JXTU - cout: 0.0 benefice: 14.86
+Share-RBTN - cout: 0.0 benefice: 33.06
+Share-EWGU - cout: 0.0 benefice: 34.27
+Share-CESY - cout: 0.0 benefice: 26.25
+Share-VXCW - cout: 0.0 benefice: 5.87
+Share-PSVO - cout: 0.0 benefice: 15.5
+Share-ARZU - cout: 0.0 benefice: 9.01
+Share-MXKO - cout: 0.0 benefice: 23.17
+Share-JNGS - cout: -2.73 benefice: 22.22
+Share-IETC - cout: 0.0 benefice: 33.17
+Share-CDSP - cout: 0.0 benefice: 16.03
+Share-GWMA - cout: 0.0 benefice: 18.22
+Share-DXLL - cout: 0.0 benefice: 28.11
+Share-CKIZ - cout: 0.0 benefice: 33.06
+Share-USDU - cout: 0.0 benefice: 33.49
+Share-WSEH - cout: 0.0 benefice: 12.43
+Share-EXKV - cout: 0.0 benefice: 27.83
+Share-SKUO - cout: 0.0 benefice: 23.55
+Share-NCIK - cout: 0.0 benefice: 30.27
+Share-OPSM - cout: 0.0 benefice: 26.28
+Share-UBRS - cout: 0.0 benefice: 31.14
+Share-HZKM - cout: 0.0 benefice: 37.07
+Share-VNMM - cout: 0.0 benefice: 16.96
+Share-LKLG - cout: 0.0 benefice: 36.41
+Share-ZRIV - cout: 0.0 benefice: 7.19
+Share-PJTN - cout: 0.0 benefice: 20.73
+Share-IQQO - cout: 0.0 benefice: 7.84
+Share-YSKI - cout: 0.0 benefice: 24.41
+Share-HUNV - cout: 0.0 benefice: 31.98
+Share-DRAB - cout: 0.0 benefice: 15.1
+Share-HFXF - cout: 0.0 benefice: 9.56
+Share-RYQW - cout: 0.0 benefice: 1.88
+
+Voici la meilleure combinaison d'actions pour un maximum de 499.43€ d'investissement sur 2 ans:
+Share-GRUT - cout: 498.76 benefice: 39.42
+Share-HITN - cout: 0.67 benefice: 33.49
+Bénéfice: 196.835575
